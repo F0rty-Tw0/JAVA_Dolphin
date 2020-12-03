@@ -93,7 +93,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerName(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerName(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -106,7 +106,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerSureName(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerSureName(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -119,7 +119,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerAge(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerAge(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -139,7 +139,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerMembership(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerMembership(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -152,7 +152,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerDiscipline(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerDiscipline(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -165,7 +165,7 @@ public class HandleSwimmers {
         } while (MessagesHandler.getSentinel() == true);
     }
 
-    private static void editSwimmerActivity(int i, ArrayList<Swimmer> mySwimmers) {
+    private void editSwimmerActivity(int i, ArrayList<Swimmer> mySwimmers) {
         do {
             try { // todo
                 MessagesHandler.setSentinel(false);
@@ -202,7 +202,7 @@ public class HandleSwimmers {
     }
 
     // Editing the selected Swimmer
-    private static void editSwimmer(int i, ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
+    private void editSwimmer(int i, ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
         do {
             try {
                 MessagesHandler.setSentinel(false);
@@ -223,7 +223,7 @@ public class HandleSwimmers {
     }
 
     // Editing a Swimmer
-    static public void editSwimmers(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
+    public void editSwimmers(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
         Menu.printSwimmers(mySwimmers);
         do {
             try {
