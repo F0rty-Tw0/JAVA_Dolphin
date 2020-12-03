@@ -53,7 +53,7 @@ public class FileHandling {
     // Saving to file
     public void saveToFile(ArrayList<Swimmer> mySwimmers) {
         try {
-            FileWriter myWriter = new FileWriter("MySwimmers.txt");
+            FileWriter myWriter = new FileWriter("SWIMMERS.txt");
             int i = 0;
             for (Swimmer Swimmer : mySwimmers) {
                 i++;

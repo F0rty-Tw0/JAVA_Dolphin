@@ -58,11 +58,11 @@ public class Menu {
                 String inputField = input.next().toUpperCase();
                 if ("Y".equals(inputField)) {
                     mySwimmer.setPayed(true);
-                    MessagesHandler.message("THIS SWIMMER WAS GRANTED AN YEARLY SUBSCRIPTION");
+                    MessagesHandler.message(mySwimmer.getName() + " WAS GRANTED AN YEARLY SUBSCRIPTION");
                     input.nextLine();
                 } else if ("N".equals(inputField)) {
                     mySwimmer.setPayed(false);
-                    MessagesHandler.message("THIS SWIMMER HAS HIS PAYMENT ON HOLD");
+                    MessagesHandler.message(mySwimmer.getName() + " HAS HIS PAYMENT ON HOLD");
                     paymentMenu(mySwimmer);
                 } else {
                     MessagesHandler.sentinel = true;
