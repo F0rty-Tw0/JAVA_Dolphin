@@ -2,9 +2,9 @@ import java.util.*; // for scanner
 import java.io.*; // for file 
 
 public class Menu {
-    static MessagesHandler MessagesHandler = new MessagesHandler();
-    static HandleSwimmers HandleSwimmers = new HandleSwimmers();
-    static Scanner input = new Scanner(System.in);
+    private static MessagesHandler MessagesHandler = new MessagesHandler();
+    private static HandleSwimmers HandleSwimmers = new HandleSwimmers();
+    private static Scanner input = new Scanner(System.in);
 
     // Swimmers printer
     public void printSwimmers(ArrayList<Swimmer> mySwimers) {

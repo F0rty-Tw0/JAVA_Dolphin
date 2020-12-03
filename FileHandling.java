@@ -2,7 +2,7 @@ import java.util.*; // for scanner
 import java.io.*; // for file 
 
 public class FileHandling {
-    static MessagesHandler MessagesHandler = new MessagesHandler();
+    private static MessagesHandler MessagesHandler = new MessagesHandler();
 
     // Reading from file
     public void readFromFile(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {

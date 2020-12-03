@@ -1,8 +1,5 @@
-import java.util.*; // for scanner
-
 public class MessagesHandler {
-    boolean sentinel = false;
-    Scanner input = new Scanner(System.in);
+    public boolean sentinel = false;
 
     public Boolean getSentinel() {
         return sentinel;
