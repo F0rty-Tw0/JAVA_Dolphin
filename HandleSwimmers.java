@@ -14,6 +14,7 @@ public class HandleSwimmers {
     private static String activity;
     private static String status;
     private static int age;
+    private static Boolean payed;
 
     private void setSwimmerName() {
         do {
@@ -61,7 +62,7 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR PASSIVE [P]");
+                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR - PASSIVE [P]");
                 MessagesHandler.message("\nYOUR INPUT: ");
                 String inputField = input.next().toUpperCase();
                 if ("A".equals(inputField)) {
@@ -94,7 +95,7 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR ELITE [E]");
+                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR - ELITE [E]");
                 MessagesHandler.message("\nYOUR INPUT: ");
                 String inputField = input.next().toUpperCase();
                 if ("C".equals(inputField)) {
@@ -161,7 +162,7 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR PASSIVE [P]");
+                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR - PASSIVE [P]");
                 MessagesHandler.message("\nYOUR INPUT: ");
                 String inputField = input.next().toUpperCase();
                 if ("A".equals(inputField)) {
@@ -197,7 +198,7 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR ELITE [E]");
+                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR - ELITE [E]");
                 MessagesHandler.message("\nYOUR INPUT: ");
                 String inputField = input.next().toUpperCase();
                 if ("C".equals(inputField)) {
@@ -227,8 +228,8 @@ public class HandleSwimmers {
                 setSwimmerMemebership();
                 setSwimmerDiscipline();
                 setSwimmerActivity();
-                MessagesHandler.message(membership + activity);
-                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age);
+                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed);
+                Menu.paymentMenu(Swimmer);
                 mySwimmers.add(Swimmer);
                 MessagesHandler.message("SWIMMER : " + name + " " + surename + " WAS ADDED TO THE SWIMMERS LSIT");
                 FileHandling.saveToFile(mySwimmers);
@@ -301,7 +302,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | STATUS: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         editSwimmers(mySwimmers);
                     }
@@ -350,7 +352,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | STATUS: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         Menu.showMenu(mySwimmers);
@@ -362,7 +365,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | STATUS: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         deleteSwimmers(mySwimmers);

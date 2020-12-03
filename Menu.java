@@ -4,6 +4,7 @@ import java.io.*; // for file
 public class Menu {
     private static MessagesHandler MessagesHandler = new MessagesHandler();
     private static HandleSwimmers HandleSwimmers = new HandleSwimmers();
+    private static FeeManagment FeeManagment = new FeeManagment();
     private static Scanner input = new Scanner(System.in);
 
     // Swimmers printer
@@ -20,7 +21,7 @@ public class Menu {
             MessagesHandler.message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: "
                     + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
                     + Swimmer.getDiscipline() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
-                    + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + "\n");
+                    + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + "\n");
         }
     }
 
@@ -41,6 +42,54 @@ public class Menu {
         }
         MessagesHandler.message("==================================");
         MessagesHandler.message("\nYOUR INPUT: ");
+    }
+
+    public void confirmMenu(Swimmer mySwimmer) {
+        do {
+            try {
+                MessagesHandler.setSentinel(false);
+                MessagesHandler.message("CONFIRM THE PAYMENT - YES [Y] OR - NO [N]");
+                MessagesHandler.message("\nYOUR INPUT: ");
+                String inputField = input.next().toUpperCase();
+                if ("Y".equals(inputField)) {
+                    mySwimmer.setPayed(true);
+                    MessagesHandler.message("THIS SWIMMER WAS GRANTED AN YEARLY SUBSCRIPTION");
+                    input.nextLine();
+                } else if ("N".equals(inputField)) {
+                    mySwimmer.setPayed(false);
+                    MessagesHandler.message("THIS SWIMMER HAS HIS PAYMENT ON HOLD");
+                    paymentMenu(mySwimmer);
+                } else {
+                    MessagesHandler.sentinel = true;
+                    MessagesHandler.message("WRONG INPUT!\n");
+                }
+            } catch (InputMismatchException error) {
+                MessagesHandler.handleError();
+            }
+        } while (MessagesHandler.getSentinel() == true);
+    }
+
+    public void paymentMenu(Swimmer mySwimmer) {
+        do {
+            try {
+                MessagesHandler.setSentinel(false);
+                MessagesHandler.message("WOULD YOU LIKE TO PAY NOW? - YES [Y] OR - NO [N]");
+                MessagesHandler.message("\nYOUR INPUT: ");
+                String inputField = input.next().toUpperCase();
+                if ("Y".equals(inputField)) {
+                    FeeManagment.proceedPayment(mySwimmer);
+                } else if ("N".equals(inputField)) {
+                    mySwimmer.setPayed(false);
+                    MessagesHandler.message("THIS SWIMMER HAS HIS PAYMENT ON HOLD");
+                    input.nextLine();
+                } else {
+                    MessagesHandler.sentinel = true;
+                    MessagesHandler.message("WRONG INPUT!\n");
+                }
+            } catch (InputMismatchException error) {
+                MessagesHandler.handleError();
+            }
+        } while (MessagesHandler.getSentinel() == true);
     }
 
     // Main Menu

@@ -6,9 +6,10 @@ public class Swimmer {
     String activity;
     String status;
     int age;
+    Boolean payed;
 
     public Swimmer(String name, String surename, String membership, String discipline, String status, String activity,
-            int age) {
+            int age, Boolean payed) {
         this.name = name;
         this.surename = surename;
         this.membership = membership;
@@ -16,6 +17,7 @@ public class Swimmer {
         this.status = status;
         this.activity = activity;
         this.age = age;
+        this.payed = payed;
     };
 
     public int getAge() {
@@ -46,6 +48,10 @@ public class Swimmer {
         return status;
     }
 
+    public Boolean getPayed() {
+        return payed;
+    }
+
     public void setAge(int age) {
         this.age = age;
     };
@@ -72,5 +78,9 @@ public class Swimmer {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setPayed(Boolean payed) {
+        this.payed = payed;
     }
 }
