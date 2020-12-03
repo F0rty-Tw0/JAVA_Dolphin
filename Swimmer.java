@@ -31,7 +31,7 @@ public class Swimmer {
     };
 
     public String getMembership() {
-        return discipline;
+        return membership;
     };
 
     public String getActivity() {

@@ -49,7 +49,7 @@ public class FileHandling {
                 i++;
                 myWriter.write(i + " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
                         + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
-                        + " | ACTIVITY: " + Swimmer.getActivity() + " | STATUS: " + Swimmer.getStatus() + " | AGE: "
+                        + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
                         + Swimmer.getAge() + "\n");
             }
             myWriter.close();

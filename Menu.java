@@ -18,8 +18,8 @@ public class Menu {
         for (Swimmer Swimmer : mySwimmers) {
             i++;
             MessagesHandler.message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: "
-                    + Swimmer.getSurename() + " | DISCIPLINE: " + Swimmer.getDiscipline() + " | MEMBERSHIP: "
-                    + Swimmer.getMembership() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
+                    + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
+                    + Swimmer.getDiscipline() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
                     + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + "\n");
         }
     }
@@ -40,7 +40,7 @@ public class Menu {
             MessagesHandler.message("|         EXIT - [EXIT]          |");
         }
         MessagesHandler.message("==================================");
-        MessagesHandler.message("\nYour Input: ");
+        MessagesHandler.message("\nYOUR INPUT: ");
     }
 
     // Main Menu
@@ -65,11 +65,11 @@ public class Menu {
                 } else if ("E".equals(inputField)) {
                     HandleSwimmers.editSwimmers(mySwimmers);
                 } else if ("EXIT".equals(inputField)) {
-                    MessagesHandler.message("Exiting the program!");
+                    MessagesHandler.message("EXITING THE PROGRAM!");
                     System.exit(1);
                 } else {
                     MessagesHandler.sentinel = true;
-                    MessagesHandler.message("Wrong input!\n");
+                    MessagesHandler.message("WRONG INPUT!\n");
                 }
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
