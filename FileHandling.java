@@ -36,7 +36,10 @@ public class FileHandling {
                 line.next();
                 line.next();
                 Boolean payed = line.nextBoolean();
-                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed));
+                line.next();
+                line.next();
+                String team = line.next();
+                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team));
             }
         } catch (IOException e) {
             MessagesHandler.message("An error occurred.");
@@ -53,7 +56,8 @@ public class FileHandling {
                 myWriter.write(i + " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
                         + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
                         + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
-                        + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + "\n");
+                        + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | Team: " + Swimmer.getTeam()
+                        + "\n");
             }
             myWriter.close();
         } catch (IOException e) {

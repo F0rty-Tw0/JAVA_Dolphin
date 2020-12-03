@@ -17,6 +17,6 @@ public class MessagesHandler {
     // Error printer
     public void handleError() {
         sentinel = true;
-        message("You entered a wrong input!!!");
+        message("YOU ENTERED A WRONG INPUT!");
     };
 }

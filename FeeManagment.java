@@ -5,15 +5,15 @@ public class FeeManagment {
     public int seniorPrice = 1600;
     public int passivePrice = 500;
 
-    public int getJuniorPrice() {
+    private int getJuniorPrice() {
         return juniorPrice;
     }
 
-    public int getSeniorPrice() {
+    private int getSeniorPrice() {
         return seniorPrice;
     }
 
-    public int getPassivePrice() {
+    private int getPassivePrice() {
         return passivePrice;
     }
 
@@ -35,18 +35,20 @@ public class FeeManagment {
 
     public void proceedPayment(Swimmer mySwimmer) {
         if ("PASSIVE".equals(mySwimmer.getMembership())) {
-            MessagesHandler.message("YOU HAVE A PASSIVE MEMBERSHIP, YOUR YEARLY PRICE IS: " + passivePrice + " DKK");
+            MessagesHandler
+                    .message("YOU HAVE A PASSIVE MEMBERSHIP, YOUR YEARLY PRICE IS: " + getPassivePrice() + " DKK");
             Menu.confirmMenu(mySwimmer);
         } else {
             if (mySwimmer.getAge() < 18) {
-                MessagesHandler.message("YOU ARE A JUNIOR SWIMMER, YOUR YEARLY PRICE IS: " + juniorPrice + " DKK");
+                MessagesHandler.message("YOU ARE A JUNIOR SWIMMER, YOUR YEARLY PRICE IS: " + getJuniorPrice() + " DKK");
                 Menu.confirmMenu(mySwimmer);
             } else if (mySwimmer.getAge() >= 60) {
                 MessagesHandler.message("YOU ARE AN ELDER SWIMMER, YOUR YEARLY PRICE IS: "
-                        + (seniorPrice - (seniorPrice * 0.25)) + " DKK");
+                        + (getSeniorPrice() - (getSeniorPrice() * 0.25)) + " DKK");
                 Menu.confirmMenu(mySwimmer);
             } else {
-                MessagesHandler.message("YOU ARE AN SENIOR SWIMMER, YOUR YEARLY PRICE IS: " + seniorPrice + " DKK");
+                MessagesHandler
+                        .message("YOU ARE AN SENIOR SWIMMER, YOUR YEARLY PRICE IS: " + getSeniorPrice() + " DKK");
                 Menu.confirmMenu(mySwimmer);
             }
         }

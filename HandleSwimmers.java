@@ -15,12 +15,15 @@ public class HandleSwimmers {
     private static String status;
     private static int age;
     private static Boolean payed;
+    private static String team;
 
     private void setSwimmerName() {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A NAME: ");
+                Menu.topMenu();
+                MessagesHandler.message("|       PLEASE ENTER A NAME      |");
+                Menu.bottomMenu(false, false);
                 name = input.next().toUpperCase();
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
@@ -32,7 +35,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A SURENAME: ");
+                Menu.topMenu();
+                MessagesHandler.message("|     PLEASE ENTER A SURENAME    |");
+                Menu.bottomMenu(false, false);
                 surename = input.next().toUpperCase();
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
@@ -44,7 +49,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER THE AGE: ");
+                Menu.topMenu();
+                MessagesHandler.message("|      PLEASE ENTER THE AGE      |");
+                Menu.bottomMenu(false, false);
                 age = input.nextInt();
                 if (age >= 18) {
                     status = "SENIOR";
@@ -62,8 +69,11 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR - PASSIVE [P]");
-                MessagesHandler.message("\nYOUR INPUT: ");
+                Menu.topMenu();
+                MessagesHandler.message("|       CHOSE A MEMBERSHIP       |");
+                MessagesHandler.message("|          ACTIVE - [A]          |");
+                MessagesHandler.message("|         PASSIVE - [P]          |");
+                Menu.bottomMenu(false, false);
                 String inputField = input.next().toUpperCase();
                 if ("A".equals(inputField)) {
                     membership = "ACTIVE";
@@ -83,7 +93,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A DISCIPLINE: ");
+                Menu.topMenu();
+                MessagesHandler.message("|    PLEASE ENTER A DISCIPLINE   |");
+                Menu.bottomMenu(false, false);
                 discipline = input.next().toUpperCase();
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
@@ -95,13 +107,22 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR - ELITE [E]");
-                MessagesHandler.message("\nYOUR INPUT: ");
+                Menu.topMenu();
+                MessagesHandler.message("|        CHOSE AN ACTIVITY       |");
+                MessagesHandler.message("|          CASUAL - [C]          |");
+                MessagesHandler.message("|           ELITE - [E]          |");
+                Menu.bottomMenu(false, false);
                 String inputField = input.next().toUpperCase();
                 if ("C".equals(inputField)) {
                     activity = "CASUAL";
+                    team = "NONE";
                 } else if ("E".equals(inputField)) {
                     activity = "ELITE";
+                    if (age < 18) {
+                        team = "ONE";
+                    } else {
+                        team = "TWO";
+                    }
                 } else {
                     MessagesHandler.sentinel = true;
                     MessagesHandler.message("WRONG INPUT!\n");
@@ -116,7 +137,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A NAME: ");
+                Menu.topMenu();
+                MessagesHandler.message("|      PLEASE ENTER THE AGE      |");
+                Menu.bottomMenu(false, false);
                 name = input.next().toUpperCase();
                 mySwimmers.get(i).setName(name);
             } catch (InputMismatchException error) {
@@ -129,7 +152,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A SURENAME: ");
+                Menu.topMenu();
+                MessagesHandler.message("|     PLEASE ENTER A SURENAME    |");
+                Menu.bottomMenu(false, false);
                 surename = input.next().toUpperCase();
                 mySwimmers.get(i).setSurename(surename);
             } catch (InputMismatchException error) {
@@ -142,7 +167,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER THE AGE: ");
+                Menu.topMenu();
+                MessagesHandler.message("|      PLEASE ENTER THE AGE      |");
+                Menu.bottomMenu(false, false);
                 age = input.nextInt();
                 mySwimmers.get(i).setAge(age);
                 if (age >= 18) {
@@ -162,8 +189,11 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE A MEMBERSHIP - ACTIVE [A] OR - PASSIVE [P]");
-                MessagesHandler.message("\nYOUR INPUT: ");
+                Menu.topMenu();
+                MessagesHandler.message("|       CHOSE A MEMBERSHIP       |");
+                MessagesHandler.message("|          ACTIVE - [A]          |");
+                MessagesHandler.message("|         PASSIVE - [P]          |");
+                Menu.bottomMenu(false, false);
                 String inputField = input.next().toUpperCase();
                 if ("A".equals(inputField)) {
                     membership = "ACTIVE";
@@ -185,7 +215,9 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("PLEASE ENTER A DISCIPLINE: ");
+                Menu.topMenu();
+                MessagesHandler.message("|    PLEASE ENTER A DISCIPLINE   |");
+                Menu.bottomMenu(false, false);
                 discipline = input.next().toUpperCase();
                 mySwimmers.get(i).setDiscipline(discipline);
             } catch (InputMismatchException error) {
@@ -198,15 +230,24 @@ public class HandleSwimmers {
         do {
             try {
                 MessagesHandler.setSentinel(false);
-                MessagesHandler.message("CHOSE AN ACTIVITY - CASUAL [C] OR - ELITE [E]");
-                MessagesHandler.message("\nYOUR INPUT: ");
+                Menu.topMenu();
+                MessagesHandler.message("|        CHOSE AN ACTIVITY       |");
+                MessagesHandler.message("|          CASUAL - [C]          |");
+                MessagesHandler.message("|           ELITE - [E]          |");
+                Menu.bottomMenu(false, false);
                 String inputField = input.next().toUpperCase();
                 if ("C".equals(inputField)) {
                     activity = "CASUAL";
                     mySwimmers.get(i).setActivity(activity);
+                    mySwimmers.get(i).setTeam("NONE");
                 } else if ("E".equals(inputField)) {
                     activity = "ELITE";
                     mySwimmers.get(i).setActivity(activity);
+                    if (age < 18) {
+                        mySwimmers.get(i).setTeam("ONE");
+                    } else {
+                        mySwimmers.get(i).setTeam("TWO");
+                    }
                 } else {
                     MessagesHandler.sentinel = true;
                     MessagesHandler.message("WRONG INPUT!\n");
@@ -228,7 +269,7 @@ public class HandleSwimmers {
                 setSwimmerMemebership();
                 setSwimmerDiscipline();
                 setSwimmerActivity();
-                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed);
+                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team);
                 Menu.paymentMenu(Swimmer);
                 mySwimmers.add(Swimmer);
                 MessagesHandler.message("SWIMMER : " + name + " " + surename + " WAS ADDED TO THE SWIMMERS LSIT");
@@ -291,7 +332,9 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | STATUS: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         Menu.showMenu(mySwimmers);
                     } else if (mySwimmers.size() >= 1) {
@@ -303,7 +346,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         editSwimmers(mySwimmers);
                     }
@@ -315,7 +359,7 @@ public class HandleSwimmers {
                     Menu.showMenu(mySwimmers);
                 } else {
                     MessagesHandler.sentinel = true;
-                    MessagesHandler.message("Wrong input!\n");
+                    MessagesHandler.message("WRONG INPUT!\n");
                 }
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
@@ -353,7 +397,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         Menu.showMenu(mySwimmers);
@@ -366,7 +411,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         deleteSwimmers(mySwimmers);
@@ -379,7 +425,7 @@ public class HandleSwimmers {
                     Menu.showMenu(mySwimmers);
                 } else {
                     MessagesHandler.sentinel = true;
-                    MessagesHandler.message("Wrong input!\n");
+                    MessagesHandler.message("WRONG INPUT!\n");
                 }
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
