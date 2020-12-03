@@ -39,10 +39,14 @@ public class FileHandling {
                 line.next();
                 line.next();
                 String team = line.next();
-                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team));
+                line.next();
+                line.next();
+                int result = line.nextInt();
+                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
+                        result));
             }
         } catch (IOException e) {
-            MessagesHandler.message("An error occurred.");
+            MessagesHandler.message("AN ERROR HAS OCCURED");
         }
     };
 
@@ -56,12 +60,12 @@ public class FileHandling {
                 myWriter.write(i + " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
                         + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
                         + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
-                        + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | Team: " + Swimmer.getTeam()
-                        + "\n");
+                        + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | TEAM: " + Swimmer.getTeam()
+                        + " | RESULT: " + Swimmer.getResult() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            MessagesHandler.message("An error occurred.");
+            MessagesHandler.message("AN ERROR HAS OCCURED");
             e.printStackTrace();
         }
     }

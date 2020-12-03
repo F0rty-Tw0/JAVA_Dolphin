@@ -8,9 +8,10 @@ public class Swimmer {
     int age;
     Boolean payed;
     String team;
+    int result;
 
     public Swimmer(String name, String surename, String membership, String discipline, String status, String activity,
-            int age, Boolean payed, String team) {
+            int age, Boolean payed, String team, int result) {
         this.name = name;
         this.surename = surename;
         this.membership = membership;
@@ -20,6 +21,7 @@ public class Swimmer {
         this.age = age;
         this.payed = payed;
         this.team = team;
+        this.result = result;
     };
 
     public int getAge() {
@@ -58,6 +60,10 @@ public class Swimmer {
         return team;
     }
 
+    public int getResult() {
+        return result;
+    }
+
     public void setAge(int age) {
         this.age = age;
     };
@@ -92,5 +98,9 @@ public class Swimmer {
 
     public void setTeam(String team) {
         this.team = team;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
     }
 }

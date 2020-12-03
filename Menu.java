@@ -23,7 +23,7 @@ public class Menu {
                     + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
                     + Swimmer.getDiscipline() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
                     + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed()
-                    + " | TEAM: " + Swimmer.getTeam() + "\n");
+                    + " | TEAM: " + Swimmer.getTeam() + " | RESULT: " + Swimmer.getResult() + "\n");
         }
     }
 

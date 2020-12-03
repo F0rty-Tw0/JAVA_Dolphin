@@ -4,6 +4,7 @@ import java.io.*; // for file
 public class HandleSwimmers {
     private static MessagesHandler MessagesHandler = new MessagesHandler();
     private static FileHandling FileHandling = new FileHandling();
+    static Date nowDate = new Date();
     private static Menu Menu = new Menu();
     private static Scanner input = new Scanner(System.in);
     private static Swimmer Swimmer;
@@ -16,10 +17,12 @@ public class HandleSwimmers {
     private static int age;
     private static Boolean payed;
     private static String team;
+    private static int result;
 
     private void setSwimmerName() {
         do {
             try {
+                System.out.println(nowDate);
                 MessagesHandler.setSentinel(false);
                 Menu.topMenu();
                 MessagesHandler.message("|       PLEASE ENTER A NAME      |");
@@ -94,9 +97,25 @@ public class HandleSwimmers {
             try {
                 MessagesHandler.setSentinel(false);
                 Menu.topMenu();
-                MessagesHandler.message("|    PLEASE ENTER A DISCIPLINE   |");
+                MessagesHandler.message("|    PLEASE CHOSE A DISCIPLINE   |");
+                MessagesHandler.message("|          FREESTYLE - [F]       |");
+                MessagesHandler.message("|           BUTERFLY - [B]       |");
+                MessagesHandler.message("|         BACKSTROKE - [BA]      |");
+                MessagesHandler.message("|       BREASTSTROKE - [BR]      |");
                 Menu.bottomMenu(false, false);
-                discipline = input.next().toUpperCase();
+                String inputField = input.next().toUpperCase();
+                if ("F".equals(inputField)) {
+                    discipline = "FREESTYLE";
+                } else if ("B".equals(inputField)) {
+                    discipline = "BUTERFLY";
+                } else if ("BA".equals(inputField)) {
+                    discipline = "BACKSTROKE";
+                } else if ("BR".equals(inputField)) {
+                    discipline = "BREASTSTROKE";
+                } else {
+                    MessagesHandler.sentinel = true;
+                    MessagesHandler.message("WRONG INPUT!\n");
+                }
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
             }
@@ -216,10 +235,29 @@ public class HandleSwimmers {
             try {
                 MessagesHandler.setSentinel(false);
                 Menu.topMenu();
-                MessagesHandler.message("|    PLEASE ENTER A DISCIPLINE   |");
+                MessagesHandler.message("|    PLEASE CHOSE A DISCIPLINE   |");
+                MessagesHandler.message("|          FREESTYLE - [F]       |");
+                MessagesHandler.message("|           BUTERFLY - [B]       |");
+                MessagesHandler.message("|         BACKSTROKE - [BA]      |");
+                MessagesHandler.message("|       BREASTSTROKE - [BR]      |");
                 Menu.bottomMenu(false, false);
-                discipline = input.next().toUpperCase();
-                mySwimmers.get(i).setDiscipline(discipline);
+                String inputField = input.next().toUpperCase();
+                if ("F".equals(inputField)) {
+                    discipline = "FREESTYLE";
+                    mySwimmers.get(i).setDiscipline(discipline);
+                } else if ("B".equals(inputField)) {
+                    discipline = "BUTERFLY";
+                    mySwimmers.get(i).setDiscipline(discipline);
+                } else if ("BA".equals(inputField)) {
+                    discipline = "BACKSTROKE";
+                    mySwimmers.get(i).setDiscipline(discipline);
+                } else if ("BR".equals(inputField)) {
+                    discipline = "BREASTSTROKE";
+                    mySwimmers.get(i).setDiscipline(discipline);
+                } else {
+                    MessagesHandler.sentinel = true;
+                    MessagesHandler.message("WRONG INPUT!\n");
+                }
             } catch (InputMismatchException error) {
                 MessagesHandler.handleError();
             }
@@ -269,7 +307,8 @@ public class HandleSwimmers {
                 setSwimmerMemebership();
                 setSwimmerDiscipline();
                 setSwimmerActivity();
-                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team);
+                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
+                        result);
                 Menu.paymentMenu(Swimmer);
                 mySwimmers.add(Swimmer);
                 MessagesHandler.message("SWIMMER : " + name + " " + surename + " WAS ADDED TO THE SWIMMERS LSIT");
@@ -334,7 +373,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         Menu.showMenu(mySwimmers);
                     } else if (mySwimmers.size() >= 1) {
@@ -347,7 +387,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         editSwimmers(mySwimmers);
                     }
@@ -398,7 +439,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         Menu.showMenu(mySwimmers);
@@ -412,7 +454,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + "\n");
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
                         deleteSwimmers(mySwimmers);
