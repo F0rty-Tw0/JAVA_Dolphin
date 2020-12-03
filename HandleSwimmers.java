@@ -10,6 +10,7 @@ public class HandleSwimmers {
     static String surename;
     static String discipline;
     static String activity;
+    static String status;
     static int age;
     static Swimmer Swimmer;
 
@@ -41,6 +42,11 @@ public class HandleSwimmers {
                         MessagesHandler.setSentinel(false);
                         MessagesHandler.message("PLEASE ENTER THE AGE: ");
                         age = input.nextInt();
+                        if (age >= 18) {
+                            status = "SENIOR";
+                        } else {
+                            status = "JUNIOR";
+                        }
                     } catch (InputMismatchException error) {
                         MessagesHandler.handleError();
                         input.nextLine();
@@ -64,7 +70,7 @@ public class HandleSwimmers {
                         MessagesHandler.handleError();
                     }
                 } while (MessagesHandler.getSentinel() == true);
-                Swimmer = new Swimmer(name, surename, discipline, activity, age);
+                Swimmer = new Swimmer(name, surename, discipline, status, activity, age);
                 mySwimmers.add(Swimmer);
                 MessagesHandler.message("SWIMMER : " + name + " " + surename + " WAS ADDED TO THE SWIMMERS LSIT");
                 FileHandling.saveToFile(mySwimmers);
@@ -106,6 +112,12 @@ public class HandleSwimmers {
                         MessagesHandler.setSentinel(false);
                         MessagesHandler.message("PLEASE ENTER THE AGE: ");
                         age = input.nextInt();
+                        mySwimmers.get(i).setAge(age);
+                        if (age >= 18) {                         
+                            mySwimmers.get(i).setStatus("SENIOR");
+                        } else {
+                            mySwimmers.get(i).setStatus("JUNIOR");
+                        }
                         mySwimmers.get(i).setAge(age);
                     } catch (InputMismatchException error) {
                         MessagesHandler.handleError();
@@ -150,7 +162,7 @@ public class HandleSwimmers {
                 MessagesHandler.setSentinel(false);
                 Menu.topMenu();
                 if (mySwimmers.size() > 0) {
-                    MessagesHandler.message("|    ENTER THE SWIMMMER NUMBER    |");
+                    MessagesHandler.message("|    ENTER THE SWIMMMER NUMBER   |");
                     MessagesHandler.message("|   YOU WANT TO EDIT - [1-" + mySwimmers.size() + "]     |");
                 } else {
                     MessagesHandler.message("|     NO SWIMMERS AVAILABLE      |");
@@ -168,7 +180,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | SURENAME: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename() + " | DISCIPLINE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | ACTIVITY: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | STATUS: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         Menu.showMenu(mySwimmers);
@@ -177,7 +190,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | Surename: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename() + " | DISCIPLINE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | ACTIVITY: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | Age: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | STATUS: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | Age: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
                         editSwimmer(Integer.parseInt(inputField) - 1, mySwimmers);
                         editSwimmers(mySwimmers);
@@ -224,7 +238,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | SURENAME: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename() + " | DISCIPLINE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | ACTIVITY: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | STATUS: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);
@@ -234,7 +249,8 @@ public class HandleSwimmers {
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | SURENAME: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename() + " | DISCIPLINE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline() + " | ACTIVITY: "
-                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | STATUS: "
+                                + mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | AGE: "
                                 + mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + "\n");
                         mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         FileHandling.saveToFile(mySwimmers);

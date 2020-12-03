@@ -3,12 +3,14 @@ public class Swimmer {
     String surename;
     String discipline;
     String activity;
+    String status;
     int age;
 
-    public Swimmer(String name, String surename, String discipline, String activity, int age) {
+    public Swimmer(String name, String surename, String discipline, String status, String activity, int age) {
         this.name = name;
         this.surename = surename;
         this.discipline = discipline;
+        this.status = status;
         this.activity = activity;
         this.age = age;
     };
@@ -33,6 +35,10 @@ public class Swimmer {
         return surename;
     };
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setAge(int age) {
         this.age = age;
     };
@@ -53,4 +59,7 @@ public class Swimmer {
         this.activity = activity;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

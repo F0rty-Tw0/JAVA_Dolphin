@@ -17,9 +17,10 @@ public class Menu {
         }
         for (Swimmer Swimmer : mySwimmers) {
             i++;
-            MessagesHandler.message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: "
-                    + Swimmer.getSurename() + " | AGE: " + Swimmer.getAge() + " | DISCIPLINE: "
-                    + Swimmer.getDiscipline() + " | ACTIVITY: " + Swimmer.getActivity() + "\n");
+            MessagesHandler
+                    .message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
+                            + " | AGE: " + Swimmer.getAge() + " | DISCIPLINE: " + Swimmer.getDiscipline()
+                            + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + "\n");
         }
     }
 
