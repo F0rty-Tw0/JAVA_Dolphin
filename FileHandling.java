@@ -20,6 +20,9 @@ public class FileHandling {
                 String surename = line.next();
                 line.next();
                 line.next();
+                String membership = line.next();
+                line.next();
+                line.next();
                 String discipline = line.next();
                 line.next();
                 line.next();
@@ -30,7 +33,7 @@ public class FileHandling {
                 line.next();
                 line.next();
                 int age = line.nextInt();
-                mySwimmers.add(new Swimmer(name, surename, discipline, status, activity, age));
+                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age));
             }
         } catch (IOException e) {
             MessagesHandler.message("An error occurred.");
@@ -45,8 +48,9 @@ public class FileHandling {
             for (Swimmer Swimmer : mySwimmers) {
                 i++;
                 myWriter.write(i + " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
-                        + " | DISCIPLINE: " + Swimmer.getDiscipline() + " | ACTIVITY: " + Swimmer.getActivity()
-                        + " | STATUS: " + Swimmer.getStatus() + " | AGE: " + Swimmer.getAge() + "\n");
+                        + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
+                        + " | ACTIVITY: " + Swimmer.getActivity() + " | STATUS: " + Swimmer.getStatus() + " | AGE: "
+                        + Swimmer.getAge() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {

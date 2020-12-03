@@ -1,14 +1,17 @@
 public class Swimmer {
     String name;
     String surename;
+    String membership;
     String discipline;
     String activity;
     String status;
     int age;
 
-    public Swimmer(String name, String surename, String discipline, String status, String activity, int age) {
+    public Swimmer(String name, String surename, String membership, String discipline, String status, String activity,
+            int age) {
         this.name = name;
         this.surename = surename;
+        this.membership = membership;
         this.discipline = discipline;
         this.status = status;
         this.activity = activity;
@@ -24,6 +27,10 @@ public class Swimmer {
     };
 
     public String getDiscipline() {
+        return discipline;
+    };
+
+    public String getMembership() {
         return discipline;
     };
 
@@ -53,6 +60,10 @@ public class Swimmer {
 
     public void setDiscipline(String discipline) {
         this.discipline = discipline;
+    };
+
+    public void setMembership(String membership) {
+        this.membership = membership;
     };
 
     public void setActivity(String activity) {
