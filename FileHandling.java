@@ -7,8 +7,8 @@ public class FileHandling {
     // Reading from file
     public void readFromFile(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
         try {
-            new File("MySwimmers.txt").createNewFile();
-            Scanner file = new Scanner(new File("MySwimmers.txt")); // scans the file
+            new File("SWIMMERS.txt").createNewFile();
+            Scanner file = new Scanner(new File("SWIMMERS.txt")); // scans the file
             while (file.hasNextLine()) {
                 Scanner line = new Scanner(file.nextLine()); // Scans the line
                 line.nextInt();
