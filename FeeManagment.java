@@ -5,15 +5,15 @@ public class FeeManagment {
     public int seniorPrice = 1600;
     public int passivePrice = 500;
 
-    private int getJuniorPrice() {
+    public int getJuniorPrice() {
         return juniorPrice;
     }
 
-    private int getSeniorPrice() {
+    public int getSeniorPrice() {
         return seniorPrice;
     }
 
-    private int getPassivePrice() {
+    public int getPassivePrice() {
         return passivePrice;
     }
 

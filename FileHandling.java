@@ -5,7 +5,7 @@ public class FileHandling {
     private static MessagesHandler MessagesHandler = new MessagesHandler();
 
     // Reading from file
-    public void readFromFile(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
+    public void readSwimmersFromFile() throws FileNotFoundException {
         try {
             new File("SWIMMERS.txt").createNewFile();
             Scanner file = new Scanner(new File("SWIMMERS.txt")); // scans the file
@@ -42,7 +42,7 @@ public class FileHandling {
                 line.next();
                 line.next();
                 int result = line.nextInt();
-                mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
+                Dolphin.mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
                         result));
             }
         } catch (IOException e) {
@@ -51,11 +51,11 @@ public class FileHandling {
     };
 
     // Saving to file
-    public void saveToFile(ArrayList<Swimmer> mySwimmers) {
+    public void saveSwimmersToFile() {
         try {
             FileWriter myWriter = new FileWriter("SWIMMERS.txt");
             int i = 0;
-            for (Swimmer Swimmer : mySwimmers) {
+            for (Swimmer Swimmer : Dolphin.mySwimmers) {
                 i++;
                 myWriter.write(i + " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
                         + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()

@@ -9,15 +9,14 @@ public class Menu {
     private Boolean coach;
 
     // Swimmers printer
-    public void printSwimmers(ArrayList<Swimmer> mySwimers) {
-        ArrayList<Swimmer> mySwimmers = mySwimers;
+    public void printSwimmers() {
         int i = 0;
-        if (mySwimmers.size() == 0) {
+        if (Dolphin.mySwimmers.size() == 0) {
             MessagesHandler.message("NO SWIMMER AVAILABLE, TRY TO ADD SOME.");
         } else {
             MessagesHandler.message("PRINTING THE AVAILABLE SWIMMERS...\n");
         }
-        for (Swimmer Swimmer : mySwimmers) {
+        for (Swimmer Swimmer : Dolphin.mySwimmers) {
             i++;
             MessagesHandler.message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: "
                     + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
@@ -52,6 +51,7 @@ public class Menu {
                 MessagesHandler.setSentinel(false);
                 topMenu();
                 MessagesHandler.message("|       CONFIRM THE PAYMENT      |");
+                MessagesHandler.message("|                                |");
                 MessagesHandler.message("|            YES - [Y]           |");
                 MessagesHandler.message("|             NO - [N]           |");
                 bottomMenu(false, false);
@@ -86,6 +86,7 @@ public class Menu {
                 MessagesHandler.setSentinel(false);
                 topMenu();
                 MessagesHandler.message("|   WOULD YOU LIKE TO PAY NOW?   |");
+                MessagesHandler.message("|                                |");
                 MessagesHandler.message("|            YES - [Y]           |");
                 MessagesHandler.message("|             NO - [N]           |");
                 bottomMenu(false, false);
@@ -107,26 +108,97 @@ public class Menu {
     }
 
     // Main Menu
-    public void showMenu(ArrayList<Swimmer> mySwimmers) throws FileNotFoundException {
+    public void swimmersMenu() throws FileNotFoundException {
         do {
             try {
                 MessagesHandler.setSentinel(false);
                 topMenu();
+                MessagesHandler.message("|     MANNAGE SWIMMERS MENU      |");
+                MessagesHandler.message("|                                |");
                 MessagesHandler.message("|    ADD A NEW SWIMMER - [A]     |");
                 MessagesHandler.message("|   PRINT ALL SWIMMERS - [P]     |");
                 MessagesHandler.message("|     DELETE A SWIMMER - [D]     |");
                 MessagesHandler.message("| EDIT AN EXISTING SWIMMER - [E] |");
-                bottomMenu(false, true);
+                bottomMenu(true, false);
                 String inputField = input.nextLine().toUpperCase();
                 if ("A".equals(inputField)) {
-                    HandleSwimmers.addSwimmer(mySwimmers);
+                    HandleSwimmers.addSwimmer();
                 } else if ("P".equals(inputField)) {
-                    printSwimmers(mySwimmers);
-                    showMenu(mySwimmers);
+                    printSwimmers();
+                    swimmersMenu();
                 } else if ("D".equals(inputField)) {
-                    HandleSwimmers.deleteSwimmers(mySwimmers);
+                    HandleSwimmers.deleteSwimmers();
                 } else if ("E".equals(inputField)) {
-                    HandleSwimmers.editSwimmers(mySwimmers);
+                    HandleSwimmers.editSwimmers();
+                } else if ("BACK".equals(inputField)) {
+                    mainMenu();
+                } else {
+                    MessagesHandler.sentinel = true;
+                    MessagesHandler.message("WRONG INPUT!\n");
+                }
+            } catch (InputMismatchException error) {
+                MessagesHandler.handleError();
+            }
+        } while (MessagesHandler.getSentinel() == true);
+    }
+
+    public void selectMenu(Boolean isCoach, Boolean isTreasurer) throws FileNotFoundException {
+        do {
+            try {
+                MessagesHandler.setSentinel(false);
+                topMenu();
+                MessagesHandler.message("|       SELECT YOUR ACTION       |");
+                MessagesHandler.message("|                                |");
+                if (isCoach) {
+                    MessagesHandler.message("|      MANAGE SWIMMERS - [M]     |");
+                    MessagesHandler.message("|    SET SWIMING RESULTS - [S]   |");
+                    MessagesHandler.message("|        PRINT TOP 5 - [T]       |");
+                }
+                if (isTreasurer) {
+                    MessagesHandler.message("|  PRINT CURRENT PRICES - [P]    |");
+                    MessagesHandler.message("|    SET CURRENT PRICES - [S]    |");
+                    MessagesHandler.message("|    SET ELDER DISCOUNT - [E]    |");
+                }
+                bottomMenu(true, false);
+                String inputField = input.nextLine().toUpperCase();
+                if ("M".equals(inputField) && isCoach) {
+                    swimmersMenu();
+                } else if ("S".equals(inputField) && isCoach) {
+                    System.out.println("SET RESULTS");
+                } else if ("T".equals(inputField) && isCoach) {
+                    System.out.println("PRINT TOP 5");
+                } else if ("S".equals(inputField) && isTreasurer) {
+                    System.out.println("SET CURRENT PRICES");
+                } else if ("P".equals(inputField) && isTreasurer) {
+                    Dolphin.treasurer.printPrices(FeeManagment);
+                    System.out.println("PRINT CURRENT PRICES");
+                } else if ("E".equals(inputField) && isTreasurer) {
+                    System.out.println("SET ELDER DISCOUNT");
+                } else if ("BACK".equals(inputField)) {
+                    mainMenu();
+                }
+            } catch (InputMismatchException error) {
+                MessagesHandler.handleError();
+            }
+        } while (MessagesHandler.getSentinel() == true);
+    }
+
+    public void mainMenu() throws FileNotFoundException {
+        do {
+            try {
+                MessagesHandler.setSentinel(false);
+                topMenu();
+                MessagesHandler.message("|           MAIN MENU            |");
+                MessagesHandler.message("|                                |");
+                MessagesHandler.message("|       ENTER YOUR PASSWORD      |");
+                bottomMenu(false, true);
+                String inputField = input.nextLine().toUpperCase();
+                if ("CHAIRMAN".equals(inputField)) {
+                    swimmersMenu();
+                } else if ("COACH".equals(inputField)) {
+                    selectMenu(true, false);
+                } else if ("TREASURER".equals(inputField)) {
+                    selectMenu(false, true);
                 } else if ("EXIT".equals(inputField)) {
                     MessagesHandler.message("EXITING THE PROGRAM!");
                     System.exit(1);
