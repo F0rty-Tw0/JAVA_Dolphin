@@ -15,8 +15,9 @@ public class Menu {
             Dolphin.MessagesHandler.message("PRINTING THE AVAILABLE SWIMMERS...\n");
         }
         i = 0;
+        Collections.sort(Dolphin.mySwimmers, Swimmer.SwimmerResultComparator);
         for (Swimmer Swimmer : Dolphin.mySwimmers) {
-            if (Swimmer.getDiscipline().contains(discipline)) {
+            if (Swimmer.getDiscipline().contains(discipline) && (Swimmer.getResult() != 0)) {
                 i++;
                 Dolphin.MessagesHandler.message("NUMBER: " + i + Dolphin.FileHandling.savingLayout(Swimmer));
             } else if ("ALL".equals(discipline)) {
@@ -177,7 +178,7 @@ public class Menu {
             try {
                 Dolphin.MessagesHandler.setSentinel(false);
                 topMenu();
-                Dolphin.MessagesHandler.message("|   EDIT SWIMMING RESULTS MENU   |");
+                Dolphin.MessagesHandler.message("|  PRINT SWIMMING RESULTS MENU   |");
                 Dolphin.MessagesHandler.message("|                                |");
                 Dolphin.MessagesHandler.message("|          FREESTYLE - [F]       |");
                 Dolphin.MessagesHandler.message("|           BUTERFLY - [B]       |");
@@ -186,13 +187,17 @@ public class Menu {
                 bottomMenu(true, false);
                 String inputField = input.next().toUpperCase();
                 if ("F".equals(inputField)) {
-                    Dolphin.HandleSwimmers.editSwimmersResult("FREESTYLE");
+                    printSwimmers("FREESTYLE");
+                    swimingResultsMenu();
                 } else if ("B".equals(inputField)) {
-                    Dolphin.HandleSwimmers.editSwimmersResult("BUTERFLY");
+                    printSwimmers("BUTERFLY");
+                    swimingResultsMenu();
                 } else if ("BA".equals(inputField)) {
-                    Dolphin.HandleSwimmers.editSwimmersResult("BACKSTROKE");
+                    printSwimmers("BACKSTROKE");
+                    swimingResultsMenu();
                 } else if ("BR".equals(inputField)) {
-                    Dolphin.HandleSwimmers.editSwimmersResult("BREASTSTROKE");
+                    printSwimmers("BREASTSTROKE");
+                    swimingResultsMenu();
                 } else if ("BACK".equals(inputField)) {
                     input.nextLine();
                     selectMenu(true, false);
@@ -231,7 +236,7 @@ public class Menu {
                 } else if ("S".equals(inputField) && isCoach) {
                     swimingResultsMenu();
                 } else if ("T".equals(inputField) && isCoach) {
-                    System.out.println("PRINT TOP 5");
+                    swimingResultsMenu();
                 } else if ("S".equals(inputField) && isTreasurer) {
                     setPricesMenu();
                     selectMenu(isCoach, isTreasurer);

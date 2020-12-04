@@ -118,15 +118,29 @@ public class Swimmer {
 
     public static Comparator<Swimmer> SwimmerDisciplineComparator = new Comparator<Swimmer>() {
 
-        public int compare(Swimmer s1, Swimmer s2) {
-            String SwimmerDiscipline1 = s1.getDiscipline().toUpperCase();
-            String SwimmerDiscipline2 = s2.getDiscipline().toUpperCase();
+        public int compare(Swimmer Swimmer1, Swimmer Swimmer2) {
+            String SwimmerDiscipline1 = Swimmer1.getDiscipline().toUpperCase();
+            String SwimmerDiscipline2 = Swimmer2.getDiscipline().toUpperCase();
 
             // ascending order
             return SwimmerDiscipline1.compareTo(SwimmerDiscipline2);
 
             // descending order
             // return SwimmerDiscipline2.compareTo(SwimmerDiscipline1);
+        }
+    };
+
+    public static Comparator<Swimmer> SwimmerResultComparator = new Comparator<Swimmer>() {
+        public int compare(Swimmer Swimmer1, Swimmer Swimmer2) {
+
+            int result1 = Swimmer1.getResult();
+            int result2 = Swimmer2.getResult();
+
+            // For ascending order
+            return result1 - result2;
+
+            // For descending order
+            // return result2-result1;
         }
     };
 }
