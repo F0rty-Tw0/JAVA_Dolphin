@@ -151,53 +151,11 @@ public class Menu {
                 bottomMenu(true, false);
                 String inputField = input.nextLine().toUpperCase();
                 if ("P".equals(inputField)) {
-                    Dolphin.MessagesHandler
-                            .message("CURRENT PASSIVE PRICE IS: " + Dolphin.FeeManagment.getPassivePrice() + " DKK");
-                    do {
-                        try {
-                            Dolphin.MessagesHandler.setSentinel(false);
-                            Dolphin.MessagesHandler.message("ENTER A NEW PASSIVE PRICE: ");
-                            int newPrice = input.nextInt();
-                            Dolphin.FeeManagment.setPassivePrice(newPrice);
-                            Dolphin.MessagesHandler
-                                    .message("THE PRICE WAS CHANGED SUCCESSFUL TO: " + newPrice + " DKK");
-                            input.nextLine();
-                        } catch (InputMismatchException error) {
-                            Dolphin.MessagesHandler.handleError();
-                        }
-                    } while (Dolphin.MessagesHandler.getSentinel() == true);
+                    Dolphin.FeeManagment.changePassivePrice();
                 } else if ("S".equals(inputField)) {
-                    Dolphin.MessagesHandler
-                            .message("CURRENT SENIOR PRICE IS: " + Dolphin.FeeManagment.getSeniorPrice() + " DKK");
-                    do {
-                        try {
-                            Dolphin.MessagesHandler.setSentinel(false);
-                            Dolphin.MessagesHandler.message("ENTER A NEW SENIOR PRICE: ");
-                            int newPrice = input.nextInt();
-                            Dolphin.FeeManagment.setSeniorPrice(newPrice);
-                            Dolphin.MessagesHandler
-                                    .message("THE PRICE WAS CHANGED SUCCESSFUL TO: " + newPrice + " DKK");
-                            input.nextLine();
-                        } catch (InputMismatchException error) {
-                            Dolphin.MessagesHandler.handleError();
-                        }
-                    } while (Dolphin.MessagesHandler.getSentinel() == true);
+                    Dolphin.FeeManagment.changeSeniorPrice();
                 } else if ("J".equals(inputField)) {
-                    Dolphin.MessagesHandler
-                            .message("CURRENT JUNIOR PRICE IS: " + Dolphin.FeeManagment.getJuniorPrice() + " DKK");
-                    do {
-                        try {
-                            Dolphin.MessagesHandler.setSentinel(false);
-                            Dolphin.MessagesHandler.message("ENTER A NEW JUNIOR PRICE: ");
-                            int newPrice = input.nextInt();
-                            Dolphin.FeeManagment.setJuniorPrice(newPrice);
-                            Dolphin.MessagesHandler
-                                    .message("THE PRICE WAS CHANGED SUCCESSFUL TO: " + newPrice + " DKK");
-                            input.nextLine();
-                        } catch (InputMismatchException error) {
-                            Dolphin.MessagesHandler.handleError();
-                        }
-                    } while (Dolphin.MessagesHandler.getSentinel() == true);
+                    Dolphin.FeeManagment.changeJuniorPrice();
                 } else if ("BACK".equals(inputField)) {
                     selectMenu(false, true);
                 } else {
@@ -243,24 +201,8 @@ public class Menu {
                     Dolphin.treasurer.printPrices(Dolphin.FeeManagment);
                     selectMenu(isCoach, isTreasurer);
                 } else if ("E".equals(inputField) && isTreasurer) {
-                    if ("E".equals(inputField)) {
-                        Dolphin.MessagesHandler.message(
-                                "CURRENT ELDER DISCOUNT IS: " + Dolphin.FeeManagment.getElderDiscount() + " %");
-                        do {
-                            try {
-                                Dolphin.MessagesHandler.setSentinel(false);
-                                Dolphin.MessagesHandler.message("ENTER A NEW ELDER DISCOUNT: ");
-                                int newPrice = input.nextInt();
-                                Dolphin.FeeManagment.setElderDiscount(newPrice);
-                                Dolphin.MessagesHandler
-                                        .message("THE DISCOUNT WAS CHANGED SUCCESSFUL TO: " + newPrice + " %");
-                                input.nextLine();
-                                selectMenu(isCoach, isTreasurer);
-                            } catch (InputMismatchException error) {
-                                Dolphin.MessagesHandler.handleError();
-                            }
-                        } while (Dolphin.MessagesHandler.getSentinel() == true);
-                    }
+                    Dolphin.FeeManagment.changeElderDiscount();
+                    selectMenu(isCoach, isTreasurer);
                 } else if ("D".equals(inputField) && isTreasurer) {
                     Dolphin.treasurer.printHoldPayments();
                 } else if ("BACK".equals(inputField)) {
