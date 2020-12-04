@@ -2,8 +2,6 @@ import java.util.*; // for scanner
 import java.io.*; // for file 
 
 public class FileHandling {
-    private static MessagesHandler MessagesHandler = new MessagesHandler();
-
     // Reading from file
     public void readSwimmersFromFile() throws FileNotFoundException {
         try {
@@ -42,11 +40,11 @@ public class FileHandling {
                 line.next();
                 line.next();
                 int result = line.nextInt();
-                Dolphin.mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
-                        result));
+                Dolphin.mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed,
+                        team, result));
             }
         } catch (IOException e) {
-            MessagesHandler.message("AN ERROR HAS OCCURED");
+            Dolphin.MessagesHandler.message("AN ERROR HAS OCCURED");
         }
     };
 
@@ -65,7 +63,7 @@ public class FileHandling {
             }
             myWriter.close();
         } catch (IOException e) {
-            MessagesHandler.message("AN ERROR HAS OCCURED");
+            Dolphin.MessagesHandler.message("AN ERROR HAS OCCURED");
             e.printStackTrace();
         }
     }

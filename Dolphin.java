@@ -2,8 +2,11 @@ import java.util.*; // for scanner
 import java.io.*; // for file 
 
 public class Dolphin {
-    private static Menu Menu = new Menu();
-    private static FileHandling FileHandling = new FileHandling();
+    public static Menu Menu = new Menu();
+    public static FileHandling FileHandling = new FileHandling();
+    public static MessagesHandler MessagesHandler = new MessagesHandler();
+    public static HandleSwimmers HandleSwimmers = new HandleSwimmers();
+    public static FeeManagment FeeManagment = new FeeManagment();
     public static ArrayList<Swimmer> mySwimmers = new ArrayList<>();;
     private static Chairman chairman = new Chairman("Razvan");
     public static Treasurer treasurer = new Treasurer("Pawel");
