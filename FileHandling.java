@@ -3,6 +3,7 @@ import java.io.*; // for file
 
 public class FileHandling {
 
+    // A layout to save to the a Swimmer to the Swimmers Array List
     private void scaningLayout(Scanner file) throws FileNotFoundException {
         while (file.hasNextLine()) {
             Scanner line = new Scanner(file.nextLine()); // Scans the line
@@ -45,6 +46,7 @@ public class FileHandling {
         }
     }
 
+    // Saving to the file Layout (how it will be displayed in the file)
     public String savingLayout(Swimmer Swimmer) {
         return " | " + " NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename() + " | MEMBERSHIP: "
                 + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline() + " | STATUS: "
@@ -53,27 +55,34 @@ public class FileHandling {
                 + Swimmer.getCoach() + " | RESULT: " + Swimmer.getResult() + "\n";
     }
 
-    // Reading Swimmers from file
+    // Reading Swimmers from the file
     public void readSwimmersFromFile() throws FileNotFoundException {
         try {
+            // Creating new File
             new File("SWIMMERS.txt").createNewFile();
-            Scanner file = new Scanner(new File("SWIMMERS.txt")); // scans the file
+            // Scans the File
+            Scanner file = new Scanner(new File("SWIMMERS.txt")); 
+            // Setting the Layout
             scaningLayout(file);
         } catch (IOException e) {
             Dolphin.MessagesHandler.message("AN ERROR HAS OCCURED");
         }
     };
 
-    // Saving Swimmers to file
+    // Saving Swimmers to the file
     public void saveSwimmersToFile() {
         try {
+            // Assigning the file
             FileWriter myWriter = new FileWriter("SWIMMERS.txt");
             int i = 0;
+            // Sorting the Swimmers by the disciplines
             Collections.sort(Dolphin.mySwimmers, Swimmer.SwimmerDisciplineComparator);
+            // Writing to the file the layout based on each Swimmer
             for (Swimmer Swimmer : Dolphin.mySwimmers) {
                 i++;
                 myWriter.write(i + savingLayout(Swimmer));
             }
+            // Closing the file
             myWriter.close();
         } catch (IOException e) {
             Dolphin.MessagesHandler.message("AN ERROR HAS OCCURED");

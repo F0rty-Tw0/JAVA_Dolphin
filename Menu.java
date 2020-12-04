@@ -3,23 +3,26 @@ import java.io.*; // for file
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
-    public int i;
 
     String pattern = "as";
 
     // Swimmers printer
     public void printSwimmers(String discipline) {
+        // Checking if we have swimmers
         if (Dolphin.mySwimmers.size() == 0) {
             Dolphin.MessagesHandler.message("NO SWIMMER AVAILABLE, TRY TO ADD SOME.");
         } else {
             Dolphin.MessagesHandler.message("PRINTING THE AVAILABLE SWIMMERS...\n");
         }
-        i = 0;
+        int i = 0;
+        // Sorting the swimmers based on their result
         Collections.sort(Dolphin.mySwimmers, Swimmer.SwimmerResultComparator);
         for (Swimmer Swimmer : Dolphin.mySwimmers) {
+            // Checking which discipline we want to print and ignoring the swimmers with result 0
             if (Swimmer.getDiscipline().contains(discipline) && (Swimmer.getResult() != 0)) {
                 i++;
                 Dolphin.MessagesHandler.message("NUMBER: " + i + Dolphin.FileHandling.savingLayout(Swimmer));
+            // Printing all Swimmers
             } else if ("ALL".equals(discipline)) {
                 i++;
                 Dolphin.MessagesHandler.message("NUMBER: " + i + Dolphin.FileHandling.savingLayout(Swimmer));
@@ -27,6 +30,7 @@ public class Menu {
         }
     }
 
+    // Reusable Component - Top menu
     public void topMenu() {
         Dolphin.MessagesHandler.message("==================================");
         Dolphin.MessagesHandler.message("|         SWIMMERS BOOK          |");
@@ -34,6 +38,7 @@ public class Menu {
         Dolphin.MessagesHandler.message("|                                |");
     }
 
+    // Reusable Component - Bottom menu, back or exit 
     public void bottomMenu(boolean back, boolean exit) {
         Dolphin.MessagesHandler.message("|                                |");
         if (back) {
@@ -46,6 +51,7 @@ public class Menu {
         Dolphin.MessagesHandler.message("\nYOUR INPUT: ");
     }
 
+    // Reusable Component - Confirmation menu
     public void confirmMenu(Swimmer mySwimmer) {
         do {
             try {
@@ -75,12 +81,7 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
-    public void coachMenu(Boolean coach) {
-        if (coach) {
-            Dolphin.MessagesHandler.message("|   PRINT ALL SWIMMERS - [P]     |");
-        }
-    }
-
+    // Payment menu
     public void paymentMenu(Swimmer mySwimmer) {
         do {
             try {
@@ -108,8 +109,8 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
-    // Main Menu
-    public void swimmersMenu() throws FileNotFoundException {
+    // Mannage swimmers Menu
+    public void swimmersMenu(Boolean isCoach) throws FileNotFoundException {
         do {
             try {
                 Dolphin.MessagesHandler.setSentinel(false);
@@ -123,16 +124,16 @@ public class Menu {
                 bottomMenu(true, false);
                 String inputField = input.nextLine().toUpperCase();
                 if ("A".equals(inputField)) {
-                    Dolphin.HandleSwimmers.addSwimmer();
+                    Dolphin.HandleSwimmers.addSwimmer(isCoach);
                 } else if ("P".equals(inputField)) {
                     printSwimmers("ALL");
-                    swimmersMenu();
+                    swimmersMenu(isCoach);
                 } else if ("D".equals(inputField)) {
-                    Dolphin.HandleSwimmers.deleteSwimmers();
+                    Dolphin.HandleSwimmers.deleteSwimmers(isCoach);
                 } else if ("E".equals(inputField)) {
-                    Dolphin.HandleSwimmers.editSwimmers();
+                    Dolphin.HandleSwimmers.editSwimmers(isCoach);
                 } else if ("BACK".equals(inputField)) {
-                    mainMenu();
+                    selectMenu(true, isCoach, false);
                 } else {
                     Dolphin.MessagesHandler.sentinel = true;
                     Dolphin.MessagesHandler.message("WRONG INPUT!\n");
@@ -143,6 +144,7 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
+    // Set prices menu
     public void setPricesMenu() throws FileNotFoundException {
         do {
             try {
@@ -162,7 +164,7 @@ public class Menu {
                 } else if ("J".equals(inputField)) {
                     Dolphin.FeeManagment.changeJuniorPrice();
                 } else if ("BACK".equals(inputField)) {
-                    selectMenu(false, true);
+                    selectMenu(false, false, true);
                 } else {
                     Dolphin.MessagesHandler.sentinel = true;
                     Dolphin.MessagesHandler.message("WRONG INPUT!\n");
@@ -173,6 +175,7 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
+    // Printing swimming results menu
     public void swimingResultsMenu() throws FileNotFoundException {
         do {
             try {
@@ -200,7 +203,7 @@ public class Menu {
                     swimingResultsMenu();
                 } else if ("BACK".equals(inputField)) {
                     input.nextLine();
-                    selectMenu(true, false);
+                    selectMenu(false, true, false);
                 } else {
                     Dolphin.MessagesHandler.sentinel = true;
                     Dolphin.MessagesHandler.message("WRONG INPUT!\n");
@@ -211,16 +214,19 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
-    public void selectMenu(Boolean isCoach, Boolean isTreasurer) throws FileNotFoundException {
+    // Main menu based on the Administrator
+    public void selectMenu(Boolean isChairman, Boolean isCoach, Boolean isTreasurer) throws FileNotFoundException {
         do {
             try {
                 Dolphin.MessagesHandler.setSentinel(false);
                 topMenu();
                 Dolphin.MessagesHandler.message("|       SELECT YOUR ACTION       |");
                 Dolphin.MessagesHandler.message("|                                |");
-                if (isCoach) {
+                if (isCoach || isChairman) {
                     Dolphin.MessagesHandler.message("|      MANAGE SWIMMERS - [M]     |");
-                    Dolphin.MessagesHandler.message("|    SET SWIMING RESULTS - [S]   |");
+                }
+                if (isCoach) {
+                    Dolphin.MessagesHandler.message("|   EDIT SWIMING RESULTS - [E]   |");
                     Dolphin.MessagesHandler.message("|        PRINT TOP 5 - [T]       |");
                 }
                 if (isTreasurer) {
@@ -231,26 +237,29 @@ public class Menu {
                 }
                 bottomMenu(true, false);
                 String inputField = input.nextLine().toUpperCase();
-                if ("M".equals(inputField) && isCoach) {
-                    swimmersMenu();
-                } else if ("S".equals(inputField) && isCoach) {
-                    swimingResultsMenu();
+                if ("M".equals(inputField) && (isCoach || isChairman)) {
+                    swimmersMenu(isCoach);
+                } else if ("E".equals(inputField) && isCoach) {
+                    Dolphin.HandleSwimmers.editSwimmersResult();
                 } else if ("T".equals(inputField) && isCoach) {
                     swimingResultsMenu();
                 } else if ("S".equals(inputField) && isTreasurer) {
                     setPricesMenu();
-                    selectMenu(isCoach, isTreasurer);
+                    selectMenu(isChairman, isCoach, isTreasurer);
                 } else if ("P".equals(inputField) && isTreasurer) {
                     Dolphin.treasurer.printPrices();
-                    selectMenu(isCoach, isTreasurer);
+                    selectMenu(isChairman, isCoach, isTreasurer);
                 } else if ("E".equals(inputField) && isTreasurer) {
                     Dolphin.FeeManagment.changeElderDiscount();
-                    selectMenu(isCoach, isTreasurer);
+                    selectMenu(isChairman, isCoach, isTreasurer);
                 } else if ("D".equals(inputField) && isTreasurer) {
                     Dolphin.treasurer.printHoldPayments();
-                    selectMenu(isCoach, isTreasurer);
+                    selectMenu(isChairman, isCoach, isTreasurer);
                 } else if ("BACK".equals(inputField)) {
                     mainMenu();
+                } else {
+                    Dolphin.MessagesHandler.sentinel = true;
+                    Dolphin.MessagesHandler.message("WRONG INPUT!\n");
                 }
             } catch (InputMismatchException error) {
                 Dolphin.MessagesHandler.handleError();
@@ -258,6 +267,7 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
+    // Main login Screen
     public void mainMenu() throws FileNotFoundException {
         do {
             try {
@@ -269,11 +279,11 @@ public class Menu {
                 bottomMenu(false, true);
                 String inputField = input.nextLine().toUpperCase();
                 if ("CHAIRMAN".equals(inputField)) {
-                    swimmersMenu();
+                    selectMenu(true, false, false);
                 } else if ("COACH".equals(inputField)) {
-                    selectMenu(true, false);
+                    selectMenu(false, true, false);
                 } else if ("TREASURER".equals(inputField)) {
-                    selectMenu(false, true);
+                    selectMenu(false, false, true);
                 } else if ("EXIT".equals(inputField)) {
                     Dolphin.MessagesHandler.message("EXITING THE PROGRAM!");
                     System.exit(1);

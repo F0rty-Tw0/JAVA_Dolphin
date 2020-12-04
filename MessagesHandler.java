@@ -1,10 +1,12 @@
 public class MessagesHandler {
     public boolean sentinel = false;
 
+    // Sentiel Getter
     public Boolean getSentinel() {
         return sentinel;
     }
 
+    // Sentinel Setter
     public void setSentinel(boolean sentinel) {
         this.sentinel = sentinel;
     }

@@ -3,11 +3,13 @@ import java.util.*; // for scanner
 public class FeeManagment {
     private static Scanner input = new Scanner(System.in);
 
+    // Default prices
     public int juniorPrice = 1000;
     public int seniorPrice = 1600;
     public int passivePrice = 500;
     public int elderDiscount = 25;
 
+    // Getters for prices
     public int getJuniorPrice() {
         return juniorPrice;
     }
@@ -24,6 +26,7 @@ public class FeeManagment {
         return elderDiscount;
     }
 
+    // Setters for prices
     public void setJuniorPrice(int juniorPrice) {
         this.juniorPrice = juniorPrice;
     }
@@ -40,21 +43,26 @@ public class FeeManagment {
         this.elderDiscount = elderDiscount;
     }
 
+    // Proceed payment method
     public void proceedPayment(Swimmer mySwimmer) {
+        // Checking if the membership is passive
         if ("PASSIVE".equals(mySwimmer.getMembership())) {
             Dolphin.MessagesHandler
                     .message("YOU HAVE A PASSIVE MEMBERSHIP, YOUR YEARLY PRICE IS: " + getPassivePrice() + " DKK");
             Dolphin.Menu.confirmMenu(mySwimmer);
         } else {
+            // Checking if the age is less than 18 
             if (mySwimmer.getAge() < 18) {
                 Dolphin.MessagesHandler
                         .message("YOU ARE A JUNIOR SWIMMER, YOUR YEARLY PRICE IS: " + getJuniorPrice() + " DKK");
                 Dolphin.Menu.confirmMenu(mySwimmer);
+            // Checking if the age is more than 60 
             } else if (mySwimmer.getAge() >= 60) {
                 Dolphin.MessagesHandler.message(
                         "YOU ARE AN ELDER SWIMMER YOU HAVE " + getElderDiscount() + "% DISCOUNT, YOUR YEARLY PRICE IS: "
                                 + (getSeniorPrice() - ((getSeniorPrice() / 100) * getElderDiscount())) + " DKK");
                 Dolphin.Menu.confirmMenu(mySwimmer);
+            // Otherwise assigning a senior price
             } else {
                 Dolphin.MessagesHandler
                         .message("YOU ARE AN SENIOR SWIMMER, YOUR YEARLY PRICE IS: " + getSeniorPrice() + " DKK");
@@ -63,6 +71,7 @@ public class FeeManagment {
         }
     }
 
+    // Price Changers
     public void changePassivePrice() {
         Dolphin.MessagesHandler.message("CURRENT PASSIVE PRICE IS: " + getPassivePrice() + " DKK");
         do {

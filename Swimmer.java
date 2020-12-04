@@ -1,6 +1,7 @@
 import java.util.Comparator;
 
 public class Swimmer {
+    // Atributes that a Swimmer must have
     String name;
     String surename;
     String membership;
@@ -13,6 +14,7 @@ public class Swimmer {
     String coach;
     int result;
 
+    // Constructor for Swimmer with all atributes
     public Swimmer(String name, String surename, String membership, String discipline, String status, String activity,
             int age, Boolean payed, String team, String coach, int result) {
         this.name = name;
@@ -28,6 +30,7 @@ public class Swimmer {
         this.result = result;
     };
 
+    // Swimmer Getters
     public int getAge() {
         return age;
     };
@@ -72,6 +75,7 @@ public class Swimmer {
         return coach;
     }
 
+    // Swimmer Setters
     public void setAge(int age) {
         this.age = age;
     };
@@ -116,20 +120,22 @@ public class Swimmer {
         this.coach = coach;
     }
 
+    // Filter for Discipline filtering
     public static Comparator<Swimmer> SwimmerDisciplineComparator = new Comparator<Swimmer>() {
 
         public int compare(Swimmer Swimmer1, Swimmer Swimmer2) {
             String SwimmerDiscipline1 = Swimmer1.getDiscipline().toUpperCase();
             String SwimmerDiscipline2 = Swimmer2.getDiscipline().toUpperCase();
 
-            // ascending order
+            // Ascending order
             return SwimmerDiscipline1.compareTo(SwimmerDiscipline2);
 
-            // descending order
+            // Aescending order
             // return SwimmerDiscipline2.compareTo(SwimmerDiscipline1);
         }
     };
 
+    // Filter for Result filtering
     public static Comparator<Swimmer> SwimmerResultComparator = new Comparator<Swimmer>() {
         public int compare(Swimmer Swimmer1, Swimmer Swimmer2) {
 
