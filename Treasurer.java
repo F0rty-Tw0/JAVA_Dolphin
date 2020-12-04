@@ -11,7 +11,7 @@ public class Treasurer extends Administrator {
         Dolphin.MessagesHandler.message("ELDER DISCOUNT IS: " + FeeManagment.getElderDiscount() + "%");
     }
 
-    public void setPrices() {
-
+    public void printHoldPayments() {
+        Dolphin.MessagesHandler.message("Printing all who didn't pay");
     }
 }

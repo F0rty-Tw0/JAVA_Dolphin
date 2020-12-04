@@ -36,10 +36,6 @@ public class FeeManagment {
         this.elderDiscount = elderDiscount;
     }
 
-    public void printHoldPayments() {
-        Dolphin.MessagesHandler.message("Printing all who didn't pay");
-    }
-
     public void proceedPayment(Swimmer mySwimmer) {
         if ("PASSIVE".equals(mySwimmer.getMembership())) {
             Dolphin.MessagesHandler
