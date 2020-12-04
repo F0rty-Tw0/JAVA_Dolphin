@@ -39,9 +39,12 @@ public class FileHandling {
                 String team = line.next();
                 line.next();
                 line.next();
+                String coach = line.next();
+                line.next();
+                line.next();
                 int result = line.nextInt();
                 Dolphin.mySwimmers.add(new Swimmer(name, surename, membership, discipline, status, activity, age, payed,
-                        team, result));
+                        team, coach, result));
             }
         } catch (IOException e) {
             Dolphin.MessagesHandler.message("AN ERROR HAS OCCURED");
@@ -59,7 +62,7 @@ public class FileHandling {
                         + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
                         + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
                         + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | TEAM: " + Swimmer.getTeam()
-                        + " | RESULT: " + Swimmer.getResult() + "\n");
+                        + " | COACH: " + Swimmer.getCoach() + " | RESULT: " + Swimmer.getResult() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {

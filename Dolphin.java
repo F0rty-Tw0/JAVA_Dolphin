@@ -8,9 +8,10 @@ public class Dolphin {
     public static HandleSwimmers HandleSwimmers = new HandleSwimmers();
     public static FeeManagment FeeManagment = new FeeManagment();
     public static ArrayList<Swimmer> mySwimmers = new ArrayList<>();;
-    private static Chairman chairman = new Chairman("Razvan");
-    public static Treasurer treasurer = new Treasurer("Pawel");
-    private static Coach coach = new Coach("Art", "FREESTYLE");
+    private static Chairman chairman = new Chairman("RAZVAN");
+    public static Treasurer treasurer = new Treasurer("PAWEL");
+    public static Coach[] coachList = { new Coach("JOHN", "FREESTYLE"), new Coach("DOE", "BUTERFLY"),
+            new Coach("ART", "BACKSTROKE"), new Coach("FENIX", "BREASTSTROKE") };
 
     public static void main(String[] args) throws FileNotFoundException {
         FileHandling.readSwimmersFromFile();

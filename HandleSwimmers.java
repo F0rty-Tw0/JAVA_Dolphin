@@ -14,6 +14,7 @@ public class HandleSwimmers {
     private static int age;
     private static Boolean payed;
     private static String team;
+    private static String coach;
     private static int result;
 
     private void setSwimmerName() {
@@ -114,6 +115,11 @@ public class HandleSwimmers {
                 } else {
                     Dolphin.MessagesHandler.sentinel = true;
                     Dolphin.MessagesHandler.message("WRONG INPUT!\n");
+                }
+                for (int j = 0; j < Dolphin.coachList.length; j++) {
+                    if (discipline.equals(Dolphin.coachList[j].getDiscipline()) && "ELITE".equals(activity)) {
+                        coach = Dolphin.coachList[j].getName();
+                    }
                 }
             } catch (InputMismatchException error) {
                 Dolphin.MessagesHandler.handleError();
@@ -260,6 +266,12 @@ public class HandleSwimmers {
                     Dolphin.MessagesHandler.sentinel = true;
                     Dolphin.MessagesHandler.message("WRONG INPUT!\n");
                 }
+                for (int j = 0; j < Dolphin.coachList.length; j++) {
+                    if (discipline.equals(Dolphin.coachList[j].getDiscipline())
+                            && "ELITE".equals(Dolphin.mySwimmers.get(i).getActivity())) {
+                        Dolphin.mySwimmers.get(i).setCoach(Dolphin.coachList[j].getName());
+                    }
+                }
             } catch (InputMismatchException error) {
                 Dolphin.MessagesHandler.handleError();
             }
@@ -308,9 +320,9 @@ public class HandleSwimmers {
                 setSwimmerSureName();
                 setSwimmerAge();
                 setSwimmerMemebership();
-                setSwimmerDiscipline();
                 setSwimmerActivity();
-                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team,
+                setSwimmerDiscipline();
+                Swimmer = new Swimmer(name, surename, membership, discipline, status, activity, age, payed, team, coach,
                         result);
                 Dolphin.Menu.paymentMenu(Swimmer);
                 Dolphin.mySwimmers.add(Swimmer);
@@ -334,8 +346,8 @@ public class HandleSwimmers {
                 editSwimmerSureName(i);
                 editSwimmerAge(i);
                 editSwimmerMembership(i);
-                editSwimmerDiscipline(i);
                 editSwimmerActivity(i);
+                editSwimmerDiscipline(i);
                 Dolphin.MessagesHandler
                         .message("SWIMMER : " + name + " " + surename + " WAS EDITED TO THE SWIMMER LSIT");
                 Dolphin.FileHandling.saveSwimmersToFile();
@@ -345,6 +357,20 @@ public class HandleSwimmers {
                 Dolphin.MessagesHandler.handleError();
             }
         } while (Dolphin.MessagesHandler.getSentinel() == true);
+    }
+
+    private String messageSwimmerLine(String inputField) {
+        return (inputField) + " | " + " NAME: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getName()
+                + " | SURENAME: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename()
+                + " | MEMEMBERSHIP: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getMembership()
+                + " | DISCIPLINE: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline()
+                + " | STATUS: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus() + " | ACTIVITY: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | COACH: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getCoach() + " | RESULT: "
+                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n";
     }
 
     // Editing a Swimmer
@@ -371,37 +397,11 @@ public class HandleSwimmers {
                                 .message("ENTER A NUMBER BETWEEN [1-" + Dolphin.mySwimmers.size() + "] !!!");
                         editSwimmers();
                     } else if (Dolphin.mySwimmers.size() == 1) {
-                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + (inputField) + " | " + " NAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | SURENAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename()
-                                + " | MEMEMBERSHIP: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getMembership()
-                                + " | DISCIPLINE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline()
-                                + " | STATUS: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus()
-                                + " | ACTIVITY: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
+                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + messageSwimmerLine(inputField));
                         editSwimmer(Integer.parseInt(inputField) - 1);
                         Dolphin.Menu.swimmersMenu();
                     } else if (Dolphin.mySwimmers.size() >= 1) {
-                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + (inputField) + " | " + " NAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getName() + " | SURENAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename()
-                                + " | MEMEMBERSHIP: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getMembership()
-                                + " | DISCIPLINE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline()
-                                + " | STATUS: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus()
-                                + " | ACTIVITY: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
+                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + messageSwimmerLine(inputField));
                         editSwimmer(Integer.parseInt(inputField) - 1);
                         editSwimmers();
                     }
@@ -445,40 +445,14 @@ public class HandleSwimmers {
                                 .message("ENTER A NUMBER BETWEEN [1-" + Dolphin.mySwimmers.size() + "] !!!");
                         deleteSwimmers();
                     } else if (Dolphin.mySwimmers.size() == 1) {
-                        Dolphin.MessagesHandler.message("SUCCESSFULL DELETED NUMBER: " + (inputField) + " | "
-                                + " NAME: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getName()
-                                + " | SURENAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename()
-                                + " | MEMEMBERSHIP: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getMembership()
-                                + " | DISCIPLINE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline()
-                                + " | STATUS: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus()
-                                + " | ACTIVITY: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
+                        Dolphin.MessagesHandler
+                                .message("SUCCESSFULL DELETED NUMBER: " + messageSwimmerLine(inputField));
                         Dolphin.mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         Dolphin.FileHandling.saveSwimmersToFile();
                         Dolphin.Menu.swimmersMenu();
                     } else if (Dolphin.mySwimmers.size() >= 1) {
-                        Dolphin.MessagesHandler.message("SUCCESSFULL DELETED NUMBER: " + (inputField) + " | "
-                                + " NAME: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getName()
-                                + " | SURENAME: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getSurename()
-                                + " | MEMEMBERSHIP: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getMembership()
-                                + " | DISCIPLINE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getDiscipline()
-                                + " | STATUS: " + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getStatus()
-                                + " | ACTIVITY: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getActivity() + " | AGE: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getAge() + " | PAYED: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getPayed() + " | TEAM: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getTeam() + " | RESULT: "
-                                + Dolphin.mySwimmers.get(Integer.parseInt(inputField) - 1).getResult() + "\n");
+                        Dolphin.MessagesHandler
+                                .message("SUCCESSFULL DELETED NUMBER: " + messageSwimmerLine(inputField));
                         Dolphin.mySwimmers.remove(Integer.parseInt(inputField) - 1);
                         Dolphin.FileHandling.saveSwimmersToFile();
                         deleteSwimmers();

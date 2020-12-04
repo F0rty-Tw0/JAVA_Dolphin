@@ -14,11 +14,12 @@ public class Menu {
         }
         for (Swimmer Swimmer : Dolphin.mySwimmers) {
             i++;
-            Dolphin.MessagesHandler.message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: "
-                    + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
-                    + Swimmer.getDiscipline() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
-                    + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed()
-                    + " | TEAM: " + Swimmer.getTeam() + " | RESULT: " + Swimmer.getResult() + "\n");
+            Dolphin.MessagesHandler
+                    .message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
+                            + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
+                            + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
+                            + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | TEAM: " + Swimmer.getTeam()
+                            + " | COACH: " + Swimmer.getCoach() + " | RESULT: " + Swimmer.getResult() + "\n");
         }
     }
 

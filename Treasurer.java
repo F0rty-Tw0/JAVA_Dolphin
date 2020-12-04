@@ -25,8 +25,9 @@ public class Treasurer extends Administrator {
                         + Swimmer.getSurename() + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: "
                         + Swimmer.getDiscipline() + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: "
                         + Swimmer.getActivity() + " | AGE: " + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed()
-                        + " | TEAM: " + Swimmer.getTeam() + " | RESULT: " + Swimmer.getResult());
-            }            
+                        + " | TEAM: " + Swimmer.getTeam() + " | COACH: " + Swimmer.getCoach() + " | RESULT: "
+                        + Swimmer.getResult());
+            }
         }
     }
 }

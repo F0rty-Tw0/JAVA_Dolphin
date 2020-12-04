@@ -5,4 +5,8 @@ public class Coach extends Administrator {
         super(name);
         this.discipline = discipline;
     }
+
+    public String getDiscipline() {
+        return discipline;
+    }
 }

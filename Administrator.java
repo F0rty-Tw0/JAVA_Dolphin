@@ -4,5 +4,9 @@ public class Administrator {
     public Administrator(String name) {
         this.name = name;
     }
+    
+    public String getName() {
+        return name;
+    }
 
 }
