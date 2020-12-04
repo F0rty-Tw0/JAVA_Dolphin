@@ -198,13 +198,14 @@ public class Menu {
                     setPricesMenu();
                     selectMenu(isCoach, isTreasurer);
                 } else if ("P".equals(inputField) && isTreasurer) {
-                    Dolphin.treasurer.printPrices(Dolphin.FeeManagment);
+                    Dolphin.treasurer.printPrices();
                     selectMenu(isCoach, isTreasurer);
                 } else if ("E".equals(inputField) && isTreasurer) {
                     Dolphin.FeeManagment.changeElderDiscount();
                     selectMenu(isCoach, isTreasurer);
                 } else if ("D".equals(inputField) && isTreasurer) {
                     Dolphin.treasurer.printHoldPayments();
+                    selectMenu(isCoach, isTreasurer);
                 } else if ("BACK".equals(inputField)) {
                     mainMenu();
                 }
