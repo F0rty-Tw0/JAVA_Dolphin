@@ -389,7 +389,7 @@ public class HandleSwimmers {
                 if (Dolphin.mySwimmers.size() > 0) {
                     Dolphin.MessagesHandler.message("|    ENTER THE SWIMMMER NUMBER   |");
                     Dolphin.MessagesHandler
-                            .message("|   YOU WANT TO EDIT - [1-" + Dolphin.mySwimmers.size() + "]     |");
+                            .message("|   YOU WANT TO EDIT - [1-" + Dolphin.mySwimmers.size() + "]    |");
                 } else {
                     Dolphin.MessagesHandler.message("|     NO SWIMMERS AVAILABLE      |");
                     Dolphin.MessagesHandler.message("|        TRY TO ADD SOME         |");
@@ -463,7 +463,7 @@ public class HandleSwimmers {
                 if (Dolphin.mySwimmers.size() > 0) {
                     Dolphin.MessagesHandler.message("|    ENTER THE SWIMMMER NUMBER   |");
                     Dolphin.MessagesHandler
-                            .message("|   YOU WANT TO EDIT - [1-" + Dolphin.mySwimmers.size() + "]     |");
+                            .message("|   YOU WANT TO EDIT - [1-" + Dolphin.mySwimmers.size() + "]    |");
                 } else {
                     Dolphin.MessagesHandler.message("|     NO SWIMMERS AVAILABLE      |");
                     Dolphin.MessagesHandler.message("|        TRY TO ADD SOME         |");
@@ -511,7 +511,7 @@ public class HandleSwimmers {
                 if (Dolphin.mySwimmers.size() > 0) {
                     Dolphin.MessagesHandler.message("|    ENTER THE SWIMMERS NUMBER   |");
                     Dolphin.MessagesHandler
-                            .message("|   YOU WANT TO DELETE - [1-" + Dolphin.mySwimmers.size() + "]   |");
+                            .message("|   YOU WANT TO DELETE - [1-" + Dolphin.mySwimmers.size() + "]  |");
                 } else {
                     Dolphin.MessagesHandler.message("|     NO SWIMMERS AVAILABLE      |");
                     Dolphin.MessagesHandler.message("|        TRY TO ADD SOME         |");
