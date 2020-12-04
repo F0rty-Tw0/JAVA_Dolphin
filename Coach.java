@@ -9,4 +9,6 @@ public class Coach extends Administrator {
     public String getDiscipline() {
         return discipline;
     }
+
+    
 }

@@ -202,7 +202,6 @@ public class HandleSwimmers {
                 } else {
                     Dolphin.mySwimmers.get(i).setStatus("JUNIOR");
                 }
-                Dolphin.mySwimmers.get(i).setAge(age);
             } catch (InputMismatchException error) {
                 Dolphin.MessagesHandler.handleError();
                 input.nextLine();
@@ -339,24 +338,16 @@ public class HandleSwimmers {
 
     // Editing the selected Swimmer
     private void editSwimmer(int i) throws FileNotFoundException {
-        do {
-            try {
-                Dolphin.MessagesHandler.setSentinel(false);
-                editSwimmerName(i);
-                editSwimmerSureName(i);
-                editSwimmerAge(i);
-                editSwimmerMembership(i);
-                editSwimmerActivity(i);
-                editSwimmerDiscipline(i);
-                Dolphin.MessagesHandler
-                        .message("SWIMMER : " + name + " " + surename + " WAS EDITED TO THE SWIMMER LSIT");
-                Dolphin.FileHandling.saveSwimmersToFile();
-                input.nextLine();
-                editSwimmers();
-            } catch (InputMismatchException error) {
-                Dolphin.MessagesHandler.handleError();
-            }
-        } while (Dolphin.MessagesHandler.getSentinel() == true);
+        editSwimmerName(i);
+        editSwimmerSureName(i);
+        editSwimmerAge(i);
+        editSwimmerMembership(i);
+        editSwimmerActivity(i);
+        editSwimmerDiscipline(i);
+        Dolphin.MessagesHandler.message("SWIMMER : " + name + " " + surename + " WAS EDITED TO THE SWIMMER LSIT");
+        Dolphin.FileHandling.saveSwimmersToFile();
+        input.nextLine();
+        editSwimmers();
     }
 
     private String messageSwimmerLine(String inputField) {
@@ -375,7 +366,7 @@ public class HandleSwimmers {
 
     // Editing a Swimmer
     public void editSwimmers() throws FileNotFoundException {
-        Dolphin.Menu.printSwimmers();
+        Dolphin.Menu.printSwimmers("ALL");
         do {
             try {
                 Dolphin.MessagesHandler.setSentinel(false);
@@ -421,9 +412,78 @@ public class HandleSwimmers {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     };
 
+    private void editResult(int i) {
+        do {
+            try {
+                Dolphin.MessagesHandler.setSentinel(false);
+                Dolphin.Menu.topMenu();
+                Dolphin.MessagesHandler.message("|   PLEASE ENTER THE NEW RESULT  |");
+                Dolphin.Menu.bottomMenu(false, false);
+                result = input.nextInt();
+                Dolphin.mySwimmers.get(i).setResult(result);
+            } catch (InputMismatchException error) {
+                Dolphin.MessagesHandler.handleError();
+                input.nextLine();
+            }
+        } while (Dolphin.MessagesHandler.getSentinel() == true);
+    }
+
+    private void editSwimmerResult(int i, String discipline) throws FileNotFoundException {
+        editResult(i);
+        Dolphin.FileHandling.saveSwimmersToFile();
+        input.nextLine();
+        editSwimmersResult(discipline);
+    }
+
+    // Editing a Swimmer
+    public void editSwimmersResult(String discipline) throws FileNotFoundException {
+        Dolphin.Menu.printSwimmers(discipline);
+        do {
+            try {
+                Dolphin.MessagesHandler.setSentinel(false);
+                Dolphin.Menu.topMenu();
+                if (Dolphin.mySwimmers.size() > 0) {
+                    Dolphin.MessagesHandler.message("|    ENTER THE SWIMMMER NUMBER   |");
+                    Dolphin.MessagesHandler.message("|   YOU WANT TO EDIT - [1-" + Dolphin.Menu.i + "]     |");
+                } else {
+                    Dolphin.MessagesHandler.message("|     NO SWIMMERS AVAILABLE      |");
+                    Dolphin.MessagesHandler.message("|        TRY TO ADD SOME         |");
+                }
+                Dolphin.Menu.bottomMenu(true, false);
+                String inputField = input.next().toUpperCase();
+                try {
+                    Dolphin.MessagesHandler.setSentinel(false);
+                    if (Integer.parseInt(inputField) == 0 || Integer.parseInt(inputField) > Dolphin.Menu.i) {
+                        Dolphin.MessagesHandler.message("ENTER A NUMBER BETWEEN [1-" + Dolphin.Menu.i + "] !!!");
+                        editSwimmersResult(discipline);
+                    } else if (Dolphin.mySwimmers.size() == 1) {
+                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + messageSwimmerLine(inputField));
+                        editSwimmerResult((Integer.parseInt(inputField) - 1), discipline);
+                        Dolphin.Menu.swimingResultsMenu();
+                    } else if (Dolphin.mySwimmers.size() >= 1) {
+                        Dolphin.MessagesHandler.message("EDITING NUMBER: " + messageSwimmerLine(inputField));
+                        editSwimmerResult((Integer.parseInt(inputField) - 1), discipline);
+                        editSwimmersResult(discipline);
+                    }
+                } catch (NumberFormatException err) {
+                    Dolphin.MessagesHandler.sentinel = true;
+                }
+                if ("BACK".equals(inputField)) {
+                    input.nextLine();
+                    Dolphin.Menu.swimingResultsMenu();
+                } else {
+                    Dolphin.MessagesHandler.sentinel = true;
+                    Dolphin.MessagesHandler.message("WRONG INPUT!\n");
+                }
+            } catch (InputMismatchException error) {
+                Dolphin.MessagesHandler.handleError();
+            }
+        } while (Dolphin.MessagesHandler.getSentinel() == true);
+    };
+
     // Deleting a Swimmer
     public void deleteSwimmers() throws FileNotFoundException {
-        Dolphin.Menu.printSwimmers();
+        Dolphin.Menu.printSwimmers("ALL");
         do {
             try {
                 Dolphin.MessagesHandler.setSentinel(false);

@@ -3,23 +3,26 @@ import java.io.*; // for file
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
+    public int i;
+
+    String pattern = "as";
 
     // Swimmers printer
-    public void printSwimmers() {
-        int i = 0;
+    public void printSwimmers(String discipline) {
         if (Dolphin.mySwimmers.size() == 0) {
             Dolphin.MessagesHandler.message("NO SWIMMER AVAILABLE, TRY TO ADD SOME.");
         } else {
             Dolphin.MessagesHandler.message("PRINTING THE AVAILABLE SWIMMERS...\n");
         }
+        i = 0;
         for (Swimmer Swimmer : Dolphin.mySwimmers) {
-            i++;
-            Dolphin.MessagesHandler
-                    .message("NUMBER: " + i + " | NAME: " + Swimmer.getName() + " | SURENAME: " + Swimmer.getSurename()
-                            + " | MEMBERSHIP: " + Swimmer.getMembership() + " | DISCIPLINE: " + Swimmer.getDiscipline()
-                            + " | STATUS: " + Swimmer.getStatus() + " | ACTIVITY: " + Swimmer.getActivity() + " | AGE: "
-                            + Swimmer.getAge() + " | PAYED: " + Swimmer.getPayed() + " | TEAM: " + Swimmer.getTeam()
-                            + " | COACH: " + Swimmer.getCoach() + " | RESULT: " + Swimmer.getResult() + "\n");
+            if (Swimmer.getDiscipline().contains(discipline)) {
+                i++;
+                Dolphin.MessagesHandler.message("NUMBER: " + i + Dolphin.FileHandling.savingLayout(Swimmer));
+            } else if ("ALL".equals(discipline)) {
+                i++;
+                Dolphin.MessagesHandler.message("NUMBER: " + i + Dolphin.FileHandling.savingLayout(Swimmer));
+            }
         }
     }
 
@@ -121,7 +124,7 @@ public class Menu {
                 if ("A".equals(inputField)) {
                     Dolphin.HandleSwimmers.addSwimmer();
                 } else if ("P".equals(inputField)) {
-                    printSwimmers();
+                    printSwimmers("ALL");
                     swimmersMenu();
                 } else if ("D".equals(inputField)) {
                     Dolphin.HandleSwimmers.deleteSwimmers();
@@ -169,6 +172,40 @@ public class Menu {
         } while (Dolphin.MessagesHandler.getSentinel() == true);
     }
 
+    public void swimingResultsMenu() throws FileNotFoundException {
+        do {
+            try {
+                Dolphin.MessagesHandler.setSentinel(false);
+                topMenu();
+                Dolphin.MessagesHandler.message("|   EDIT SWIMMING RESULTS MENU   |");
+                Dolphin.MessagesHandler.message("|                                |");
+                Dolphin.MessagesHandler.message("|          FREESTYLE - [F]       |");
+                Dolphin.MessagesHandler.message("|           BUTERFLY - [B]       |");
+                Dolphin.MessagesHandler.message("|         BACKSTROKE - [BA]      |");
+                Dolphin.MessagesHandler.message("|       BREASTSTROKE - [BR]      |");
+                bottomMenu(true, false);
+                String inputField = input.next().toUpperCase();
+                if ("F".equals(inputField)) {
+                    Dolphin.HandleSwimmers.editSwimmersResult("FREESTYLE");
+                } else if ("B".equals(inputField)) {
+                    Dolphin.HandleSwimmers.editSwimmersResult("BUTERFLY");
+                } else if ("BA".equals(inputField)) {
+                    Dolphin.HandleSwimmers.editSwimmersResult("BACKSTROKE");
+                } else if ("BR".equals(inputField)) {
+                    Dolphin.HandleSwimmers.editSwimmersResult("BREASTSTROKE");
+                } else if ("BACK".equals(inputField)) {
+                    input.nextLine();
+                    selectMenu(true, false);
+                } else {
+                    Dolphin.MessagesHandler.sentinel = true;
+                    Dolphin.MessagesHandler.message("WRONG INPUT!\n");
+                }
+            } catch (InputMismatchException error) {
+                Dolphin.MessagesHandler.handleError();
+            }
+        } while (Dolphin.MessagesHandler.getSentinel() == true);
+    }
+
     public void selectMenu(Boolean isCoach, Boolean isTreasurer) throws FileNotFoundException {
         do {
             try {
@@ -192,7 +229,7 @@ public class Menu {
                 if ("M".equals(inputField) && isCoach) {
                     swimmersMenu();
                 } else if ("S".equals(inputField) && isCoach) {
-                    System.out.println("SET RESULTS");
+                    swimingResultsMenu();
                 } else if ("T".equals(inputField) && isCoach) {
                     System.out.println("PRINT TOP 5");
                 } else if ("S".equals(inputField) && isTreasurer) {

@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Swimmer {
     String name;
     String surename;
@@ -113,4 +115,18 @@ public class Swimmer {
     public void setCoach(String coach) {
         this.coach = coach;
     }
+
+    public static Comparator<Swimmer> SwimmerDisciplineComparator = new Comparator<Swimmer>() {
+
+        public int compare(Swimmer s1, Swimmer s2) {
+            String SwimmerDiscipline1 = s1.getDiscipline().toUpperCase();
+            String SwimmerDiscipline2 = s2.getDiscipline().toUpperCase();
+
+            // ascending order
+            return SwimmerDiscipline1.compareTo(SwimmerDiscipline2);
+
+            // descending order
+            // return SwimmerDiscipline2.compareTo(SwimmerDiscipline1);
+        }
+    };
 }
